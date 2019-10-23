@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.http  import HttpResponse
 
 # Create your views here.
 def welcome(request):
-    date = dt.date.today()
-    return render(welcome.html,{"date":date})
+    return HttpResponse('Welcome to the Moringa Tribune')
