@@ -1,5 +1,8 @@
 {%extends 'base.html'%}
-
+{% load static%}
 {% block content %}
 {{block.super}}
+{% endblock %}
+{% block scripts %} {{block.super}}
+  <script type="text/javascript" src="{%static 'js/newsletter.js'%}"></script>
 {% endblock %}
