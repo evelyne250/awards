@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'award.apps.AwardConfig',
     'tinymce',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
