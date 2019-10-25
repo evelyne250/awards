@@ -1,8 +1,19 @@
 {%extends 'base.html'%}
 {% load static%}
 {% block content %}
-{{block.super}}
+
+  <div class="container">
+
+    {% for proj in projects %}
+    <p>proj</p>
+    {% endfor %}
+  </div>
+
 {% endblock %}
+
+
+
+
 {% block scripts %} {{block.super}}
   <script type="text/javascript" src="{%static 'js/newsletter.js'%}"></script>
 {% endblock %}

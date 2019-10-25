@@ -4,11 +4,29 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import Project, Profile
-from .forms import ProfileForm
+from .forms import ProfileForm,ProjectForm
 # Create your views here.
 def welcome(request):
     date = dt.date.today()
-    return render(request, 'welcome.html',{"date":date})
+    projects = Project.objects.all()
+    profiles = Profile.objects.all()
+    return render(request, 'welcome.html',{"date":date,"projects":projects,"profiles":profiles})
+
+@login_required(login_url='/accounts/login/')
+def new_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
+            post.save()
+        return redirect('welcome')
+
+    else:
+        form = ProjectForm()
+    return render(request, 'new_post.html', {"form": form})
+
 @login_required(login_url='/accounts/login/')
 def profile(request, username=None):
 	'''
