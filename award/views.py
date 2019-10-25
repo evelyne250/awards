@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import Project, Profile
-from .forms import ProfileForm,ProjectForm
+from .forms import ProfileForm,ProjectForm,VoteForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
@@ -68,6 +68,20 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
+
+@login_required(login_url='/accounts/login')
+def project(request, project_id):
+    project = Project.objects.get(id = project_id)
+    rating = round(((project.design + project.usability + project.content)/3),2)
+    if request.method == 'POST':
+        form = VoteForm(request.POST)
+        if form.is_valid:
+            project.vote_submissions += 1
+            if project.design == 0:
+                project.design = int(request.POST['design'])
+            else:
+                project.design = (project.design + int(request.POST['design']))/2
+        return render(request,'project.html',{'form':form,'project':project,'rating':rating})
 
 class ProfileList(APIView):
     def get(self, request, format=None):
