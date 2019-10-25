@@ -24,3 +24,8 @@ class Project(models.Model):
         return f'{self.title}'
     def save_project(self):
         self.save()
+
+    @classmethod
+    def search_by_title(cls,search_term):
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
