@@ -19,19 +19,29 @@
         <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
                   <span class="caret"></span>
               </a>
-        <ul class="dropdown-menu" role="menu">
-          <li>
-            <a href="{%url 'welcome'%}">Home</a>
-          </li>
-          <li>
-            <a href="/accounts/password/change">Change Password</a>
-          </li>
-          <li>
-            <a href="/logout">Logout</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+              <ul>
+                <li class="dropdown" class='fas fa-cog' style="margin-right:500px; list-style: none;" >
+                  
+                  <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">&#xf013;
+                            <span class="caret"></span>
+                        </a>
+                  <ul class="dropdown-menu" role="menu" style="list-style: none;">
+                    <li>
+                      <a href="{%url 'welcome'%}">Home</a>
+                    </li>
+                    
+                    <li>
+                      <a href="{%url 'profile'%}">Profile</a>
+                    </li>
+                    <li>
+                            <a href="/logout">Logout</a>
+                          </li>
+                    <li>
+                      <a href="/accounts/password/change">Change Password</a>
+                    </li>
+                  
+                  </ul>
+        </div>
     {% else %}
     <li>
       <a class='btn btn-default' href="/accounts/login">Login</a>
