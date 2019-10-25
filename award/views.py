@@ -1,5 +1,5 @@
 from django.http  import HttpResponse
-import datetime as dt
+import datetime as dt 
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -9,8 +9,8 @@ from .forms import ProfileForm,ProjectForm
 def welcome(request):
     date = dt.date.today()
     projects = Project.objects.all()
-    profiles = Profile.objects.all()
-    return render(request, 'welcome.html',{"date":date,"projects":projects,"profiles":profiles})
+
+    return render(request, 'welcome.html',{"date":date,"projects":projects})
 
 @login_required(login_url='/accounts/login/')
 def new_post(request):
