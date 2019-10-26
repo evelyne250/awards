@@ -30,3 +30,14 @@ class Project(models.Model):
     def search_by_title(cls,search_term):
         projects = cls.objects.filter(title__icontains=search_term)
         return projects
+    @classmethod
+    def get_all_images(cls):
+        images=cls.objects.all().prefetch_related('comment_set')
+        return images
+
+class Comment(models.Model):
+    posted_by=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    comment_image=models.ForeignKey(Project,on_delete=models.CASCADE,null=True)
+    comment=models.CharField(max_length=20,null=True)
+    def __str__(self):
+        return self.posted_by

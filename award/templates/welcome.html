@@ -13,6 +13,15 @@
       <h2 class="text-center"> {{ news_item.title }} </h2>
       <p class="text-center"> {{ news_item.description }} </p>
       <img src="{{news_item.photo.url}}" class="card">
+      <hr>
+      {% for com in news_item.comment_set.all %}
+      <p>{{com.comment}}</p>
+      {% empty %}
+      {% endfor %}
+
+     
+<a href="{% url 'comment' news_item.id %}">Write a Review</a>
+
     </div>
 
   </div>

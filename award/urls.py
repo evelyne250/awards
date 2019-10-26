@@ -11,6 +11,7 @@ urlpatterns=[
     url(r'^new/post$', views.new_post, name='new-post'),
     url(r'^search/', views.search_results, name='search_results'),
     url(r'^project/(\d+)', views.project, name='project'),
+    url(r'^comment/(\d+)', views.add_comment, name='comment'),
     url(r'^api/profile/$', views.ProfileList.as_view(),name='profile_list'), 
     url(r'^api/project/$', views.ProjectList.as_view(),name='project_list'),
 ]
