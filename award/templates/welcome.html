@@ -3,25 +3,37 @@
 {% block content %} 
 {% load staticfiles %}
 {{ block.super}}
+<style>
+h1
+{
+  color: rgb(180, 69, 214);
+}
+#new{
+  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(media/images/screen.png);
 
+  /* width:100%; */
+  /* background-repeat: no-repeat; */
+  background-size: cover; 
+}
+</style>
 <head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <style>
-  .column {
-  float: left;
-  width: 50%;
-}
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
   </style>
-<div class="container">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<div id="new" class="container-fluid" id="overlay"><br><br><br><br><br><br><br target="_blank">
+<h1 class="text-center" class="jumbotron" style="font-family: 'Lucida Sans', 'Lucida Sans Regular'; font-size: 50px;">Welcome <br><br><span><a class='btn btn-default' style='font-size:17px; background-color: #49c5b6;' href="#own">visit site</a></span></h1><br><br><br><br>
+<br><br><br><br><br>
+
+</div>
+<br>
+
+<div class="container" id="own">
 
 
   {% for news_item in projects %}
@@ -32,7 +44,9 @@
         <p class="card-text "><img src="{{news_item.photo.url}}"  class="img-responsive"  style="width: 100%;"></p>   
         <h2 class="text-center"> {{ news_item.title }} </h2>
       <p class="text-center"> {{ news_item.description|truncatechars:70}} </p>
+      <p class="text-center">{{date|date:"l d-F Y"}}</p>
       <a target="_blank" href="{{news_item.link}}" class="btn">Visit Site</a>
+      <a target="_blank" href="{{news_item.link}}" class="text-center">Visit Site</a>
       <hr>
       {% for com in news_item.comment_set.all %}
       <p>{{com.comment}}</p>

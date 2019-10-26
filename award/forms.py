@@ -6,7 +6,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model=Profile
         fields=['bio','profile_picture'] 
-        exclude=['user']  
+        exclude=['user','projects','contact']  
 
 class ProjectForm(forms.ModelForm):
     class Meta:
