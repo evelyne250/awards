@@ -9,6 +9,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500)
     name = models.CharField(max_length=120)
     contact = models.CharField(max_length=200)
+
     def __str__(self):
         return self.name
 
@@ -16,6 +17,7 @@ class Project(models.Model):
     title = models.CharField(max_length=155)
     description = models.TextField(max_length=255)
     photo = models.ImageField(upload_to='pics/')
+    link =  models.URLField(max_length=200)
     design = models.IntegerField(default=0)
     # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="project")
     # pub_date = models.DateTimeField(auto_now_add=True)
