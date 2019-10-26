@@ -1,19 +1,37 @@
 {%extends 'base.html'%}
+{% load bootstrap3%}
 {% block content %} 
+{% load staticfiles %}
 {{ block.super}}
 
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <style>
+  .column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+  </style>
 <div class="container">
- <div class="row">
-  <!-- Looping through news   -->
+
+
   {% for news_item in projects %}
+ <div class="row">
 
- 
-    <!-- displaying News articles -->
-    <div class="col-md-5">
-
-      <img src="{{news_item.photo.url}}" >    
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+       <div class="thumbnail" >
+        <p class="card-text "><img src="{{news_item.photo.url}}"  class="img-responsive"  style="width: 100%;"></p>   
         <h2 class="text-center"> {{ news_item.title }} </h2>
-      <p class="text-center"> {{ news_item.description }} </p>
+      <p class="text-center"> {{ news_item.description|truncatechars:70}} </p>
       <a target="_blank" href="{{news_item.link}}" class="btn">Visit Site</a>
       <hr>
       {% for com in news_item.comment_set.all %}
@@ -23,7 +41,7 @@
 
      
   <a href="{% url 'comment' news_item.id %}">Write a Review</a>
-
+</div>
     </div>
 
   </div>

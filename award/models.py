@@ -7,19 +7,28 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     profile_picture = models.ImageField(upload_to='images/')
     bio = models.TextField(max_length=500)
-    name = models.CharField(max_length=120)
+    projects = models.ForeignKey('Project',on_delete=models.CASCADE,blank = True)
     contact = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
+    
+    def save_profile(self):
+        self.save()
+    
+    def delete_profile(self):
+        self.delete()
 
 class Project(models.Model):
     title = models.CharField(max_length=155)
     description = models.TextField(max_length=255)
     photo = models.ImageField(upload_to='pics/')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="project")
     link =  models.URLField(max_length=200)
     design = models.IntegerField(default=0)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="project")
+    usability = models.IntegerField(default=0)
+    content = models.IntegerField(default=0)
+    
     # pub_date = models.DateTimeField(auto_now_add=True)
     
 
@@ -27,6 +36,9 @@ class Project(models.Model):
         return f'{self.title}'
     def save_project(self):
         self.save()
+
+    def delete_project(self):
+        self.delete() 
 
     @classmethod
     def search_by_title(cls,search_term):

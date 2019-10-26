@@ -1,67 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'welcome' %}">Awarddd</a>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-6">
     {% if user.is_authenticated %}
-    <ul>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                  <span class="caret"></span>
-              </a>
-              <ul>
-                <li class="dropdown" class='fas fa-cog' style="margin-right:500px; list-style: none;" >
-                  
-                  <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">&#xf013;
-                            <span class="caret"></span>
-                        </a>
-                  <ul class="dropdown-menu" role="menu" style="list-style: none;">
-                    <li>
-                      <a href="{%url 'welcome'%}">Home</a>
-                    </li>
-                    <li>
-                      <a href="{%url 'new-post'%}">Post a project</a>
-                    </li>
-                    <li>
-                      <a href="{%url 'profile'%}">Profile</a>
-                    </li>
-                    <li>
-                      <a href="{%url 'profile_list'%}">Api Profile</a>
-                    </li>
-                    <li>
-                      <a href="{%url 'project_list'%}">Api Project</a>
-                    </li>
-             
-                    <li>
-                            <a href="/logout">Logout</a>
-                          </li>
-                    <li>
-                      <a href="/accounts/password/change">Change Password</a>
-                    </li>
-                  
-                  </ul>
-        </div>
-    {% else %}
-    <li>
-      <a class='btn btn-default' href="/accounts/login">Login</a>
-    </li>
+<div id="mySidenav" class="sidenav">
 
-    {% endif %}
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="{%url 'welcome'%}">Home</a>
+  <a href="{%url 'new-post'%}">Post a project</a>
+  <a href="{%url 'profile'%}">Profile</a>
+  <a href="{%url 'profile_list'%}">Api Profile</a>
+  <a href="{%url 'project_list'%}">Api Project</a>
+  <a href="/accounts/password/change">Change Password</a>
+  <a href="/logout">Logout</a>
+  {% else %}
+  <a class='btn btn-default' href="/accounts/login">Login</a>
+  {% endif %}
+</div>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
 
-  </div>
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+   
+</body>
+</html> 
+
 
       <!-- Adding a search form  -->
-      <div class="col-sm-4 col-md-4 navbar-right">
+      <!-- <div class="col-sm-4 col-md-4 navbar-right">
 
         <form class="navbar-form" role="search" action="{% url 'search_results' %}">
 
@@ -73,8 +92,5 @@
           </div>
 
         </form>
-      </div>
+      </div> -->
       <!-- search form end -->
-</nav>
-</body>
-</html>

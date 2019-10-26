@@ -11,12 +11,13 @@ class ProfileForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        exclude = ['user','design']
+        exclude = ['user','design','usability','content']
 
 class VoteForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['design']
+        fields = ['design','usability','content']
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

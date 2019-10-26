@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'award.apps.AwardConfig',
     'tinymce',
     'rest_framework',
+    'django_truncate',
 ]
 
 MIDDLEWARE = [
