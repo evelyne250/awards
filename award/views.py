@@ -1,4 +1,4 @@
-from django.http  import HttpResponse
+from django.http  import HttpResponse,Http404
 import datetime as dt 
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
@@ -12,10 +12,9 @@ from rest_framework import status
 
 # Create your views here.
 def welcome(request):
-    date = dt.date.today()
     projects = Project.objects.all()
 
-    return render(request, 'welcome.html',{"date":date,"projects":projects})
+    return render(request, 'welcome.html',{"projects":projects})
 
 @login_required(login_url='/accounts/login/')
 def new_post(request):
@@ -69,6 +68,33 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
+@login_required(login_url='/accounts/login/')
+def project_review(request,project_id):
+  
+       single_project = Project.objects.filter(id=project_id).first()
+       average_score = round(((single_project.design + single_project.usability + single_project.content)/3),2)
+       if request.method == 'POST':
+           vote_form = VoteForm(request.POST)
+           if vote_form.is_valid():
+               single_project.vote_submissions+=1
+               if single_project.design == 0:
+                   single_project.design = int(request.POST['design'])
+               else:
+                   single_project.design = (single_project.design + int(request.POST['design']))/2
+               if single_project.usability == 0:
+                   single_project.usability = int(request.POST['usability'])
+               else:
+                   single_project.usability = (single_project.usability + int(request.POST['usability']))/2
+               if single_project.content == 0:
+                   single_project.content = int(request.POST['content'])
+               else:
+                   single_project.content = (single_project.content + int(request.POST['usability']))/2
+               single_project.save()
+               return redirect('welcome',project_id)
+       else:
+           vote_form = VoteForm()
+
+           return render(request,'page.html',{"vote_form":vote_form,"single_project":single_project,"average_score":average_score})
 
 @login_required(login_url='/accounts/login/')     
 def add_comment(request,project_id):
