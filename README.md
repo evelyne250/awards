@@ -23,6 +23,7 @@ As a user of the application I should be able to:
 * CSS
 
 ## Link to heroku
+https://awarding.herokuapp.com/
 
 ## contact
 email: uevelyne44@gmail.com
