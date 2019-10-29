@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import Project, Profile, Comment
-from .forms import ProfileForm,ProjectForm,VoteForm, CommentForm
+from .forms import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
@@ -69,32 +69,32 @@ def search_results(request):
         return render(request, 'search.html',{"message":message})
 
 @login_required(login_url='/accounts/login/')
-def project_review(request,project_id):
+def project(request,project_id):
   
-       single_project = Project.objects.filter(id=project_id).first()
-       average_score = round(((single_project.design + single_project.usability + single_project.content)/3),2)
+       project = Project.objects.filter(id=project_id).first()
+       average_score = round(((project.design + project.usability + project.content)/3),2)
        if request.method == 'POST':
            vote_form = VoteForm(request.POST)
            if vote_form.is_valid():
-               single_project.vote_submissions+=1
-               if single_project.design == 0:
-                   single_project.design = int(request.POST['design'])
+               project.vote_submissions+=1
+               if project.design == 0:
+                   project.design = int(request.POST['design'])
                else:
-                   single_project.design = (single_project.design + int(request.POST['design']))/2
-               if single_project.usability == 0:
-                   single_project.usability = int(request.POST['usability'])
+                   project.design = (project.design + int(request.POST['design']))/2
+               if project.usability == 0:
+                   project.usability = int(request.POST['usability'])
                else:
-                   single_project.usability = (single_project.usability + int(request.POST['usability']))/2
-               if single_project.content == 0:
-                   single_project.content = int(request.POST['content'])
+                   project.usability = (project.usability + int(request.POST['usability']))/2
+               if project.content == 0:
+                   project.content = int(request.POST['content'])
                else:
-                   single_project.content = (single_project.content + int(request.POST['usability']))/2
-               single_project.save()
-               return redirect('welcome',project_id)
+                   project.content = (project.content + int(request.POST['usability']))/2
+               project.save()
+               return redirect('project', project_id)
        else:
            vote_form = VoteForm()
 
-           return render(request,'page.html',{"vote_form":vote_form,"single_project":single_project,"average_score":average_score})
+           return render(request,'project.html',{"vote_form":vote_form,"project":project,"average_score":average_score})
 
 @login_required(login_url='/accounts/login/')     
 def add_comment(request,project_id):
