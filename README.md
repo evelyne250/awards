@@ -16,12 +16,12 @@ As a user of the application I should be able to:
 * View my profile page
 
 ## Prerequisites && Installations
-Create and Activate a virtual environment.
-Download Django using pip install django==1.11
-Create a requirements.txt file with all the dependencies
-Create a new Django project using django-admin startproject name-of-project .
-Create a new Django app using django-admin startapp name-of-the-app .
-Run the development server confirm the project works.
+* Create and Activate a virtual environment.
+* Download Django using pip install django==1.11
+* Create a requirements.txt file with all the dependencies
+* Create a new Django project using django-admin startproject name-of-project .
+* Create a new Django app using django-admin startapp name-of-the-app .
+* Run the development server confirm the project works.
 
 ## Technologies Used
 * Python
