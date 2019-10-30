@@ -15,6 +15,14 @@ As a user of the application I should be able to:
 * View projects overall score
 * View my profile page
 
+## Prerequisites && Installations
+Create and Activate a virtual environment.
+Download Django using pip install django==1.11
+Create a requirements.txt file with all the dependencies
+Create a new Django project using django-admin startproject name-of-project .
+Create a new Django app using django-admin startapp name-of-the-app .
+Run the development server confirm the project works.
+
 ## Technologies Used
 * Python
 * Django
@@ -28,6 +36,11 @@ https://awarding.herokuapp.com/
 ## contact
 email: uevelyne44@gmail.com
 
-## License 
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
-MIT License
+## Acknowledgments
+* Canvas
+* w3schools
+* Stack overflow
+
